@@ -53,7 +53,6 @@ void displayIndentedTree(BST& bst) {
     cout << "-----------------------------------\n";
 }
 
-
 // UNDO DELETE MANAGER
 
 void undoDeleteManager(Stack& undoStack, HashTable<Song>& table, BST& bst) {
