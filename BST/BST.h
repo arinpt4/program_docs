@@ -5,7 +5,7 @@
 */
 
 #pragma once
-#include "Song.h"
+#include "../Song.h"
 #include <string>
 
 // Option 3 Node Structure: Key + Pointer to Hash Table data
@@ -26,11 +26,11 @@ private:
     // Helper functions (hidden from the rest of the program)
     bool caseInsensitiveLess(const std::string& a, const std::string& b) const;
     bool caseInsensitiveEqual(const std::string& a, const std::string& b) const;
-    
+
     void insertNode(TreeNode*& node, const std::string& id, Song* ptr);
     TreeNode* findMin(TreeNode* node);
     void deleteNode(TreeNode*& node, const std::string& id);
-    
+
     void printInOrder(TreeNode* node) const;
     void printIndented(TreeNode* node, int level) const;
     void destroyTree(TreeNode* node);
@@ -45,4 +45,5 @@ public:
     void remove(const std::string& id);
     void displaySorted() const;
     void displayTreeShape() const;
+    void clear();
 };

@@ -136,3 +136,8 @@ void BST::displayTreeShape() const {
         printIndented(root, 0);
     }
 }
+
+void BST::clear() {
+	destroyTree(root);
+	root = nullptr;
+}

@@ -1,17 +1,16 @@
 #include "FileIO.h"
-#include "BST/BST.h"
-#include "HashTable.h"
+
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include <string>
+
 bool allocateHash(HashTable<Song>*& hash, BST &bst, std::string inputFileName) {
 
 	int lineCount = 0;
 
 	lineCount += countLines(saveFile);
 	lineCount += countLines(inputFileName);
-	
+
 	if (lineCount > 0) {
 		// if no existing hash table, create one. otherwise rehash if needed.
 		if (!hash) {
@@ -49,8 +48,7 @@ void readSongData(HashTable<Song>*& hash, BST &bst, std::string inputFileName) {
 	loadFromFile(hash, bst, saveFile);
 }
 
-// need to fix - when rehashing, inserts to bst again, so creates duplicates. unless bst checks for duplicates.
-bool loadFromFile(HashTable<Song>*& hash, BST &bst, std::string fileName) {	
+bool loadFromFile(HashTable<Song>*& hash, BST &bst, std::string fileName) {
 	std::ifstream ifs(fileName);
 
 	if (!ifs.is_open())
@@ -73,7 +71,7 @@ bool loadFromFile(HashTable<Song>*& hash, BST &bst, std::string fileName) {
 		if (song_id.length() != 5) continue;
 		if (std::getline(temp, song_name, ';')) temp >> std::ws;
 		if (std::getline(temp, artist_name, ';')) temp >> std::ws;
-		if (std::getline(temp, length, ';')) temp >> std::ws; 
+		if (std::getline(temp, length, ';')) temp >> std::ws;
 		if (!(temp >> date_published)) date_published = 0;
 
 		Song inputSong(song_id, song_name, artist_name, length, date_published);
@@ -86,7 +84,7 @@ bool loadFromFile(HashTable<Song>*& hash, BST &bst, std::string fileName) {
 	ifs.close();
 	return true;
 }
-	
+
 void saveSongData(HashTable<Song>*& hash) {
 	std::ofstream ofs(saveFile);
 	if (!ofs.is_open()) {
@@ -106,6 +104,7 @@ void reHashData(HashTable<Song>*& hash, BST &bst, int lineCount) {
 	saveSongData(hash);
 	delete hash;
 	hash = new HashTable<Song>(nextPrime(countLines(saveFile) * 2));
+	bst.clear();
 	loadFromFile(hash, bst, saveFile);
 }
 

@@ -6,12 +6,10 @@ Name: Thomas Lwin
 #ifndef FILEIO_H
 #define FILEIO_H
 
-#include <functional>
 #include <string>
-#include "BST/BST.h"
-#include "Song.h"
-#include "HashTable.h"
-#include "BST/BST.h"
+#include "../Song.h"
+#include "../HashTable.h"
+#include "../BST/BST.h"
 
 static const std::string saveFile = "saveData.txt";
 
