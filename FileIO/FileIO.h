@@ -8,7 +8,7 @@ Name: Thomas Lwin
 
 #include <string>
 #include "../Song.h"
-#include "../HashTable.h"
+#include "../Hash/HashTable.h"
 #include "../BST/BST.h"
 
 static const std::string saveFile = "saveData.txt";

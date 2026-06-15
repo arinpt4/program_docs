@@ -7,10 +7,10 @@
 #ifndef SCREEN_MANAGER_H
 #define SCREEN_MANAGER_H
 
-#include "HashTable.h"
-#include "BST/BST.h"
+#include "../Hash/HashTable.h"
+#include "../BST/BST.h"
 #include "Stack.h" 
-#include "Song.h"
+#include "../Song.h"
 
 
 // Function Prototypes

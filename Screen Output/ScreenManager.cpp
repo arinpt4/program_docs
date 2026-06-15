@@ -8,7 +8,7 @@
 #include <string>
 #include <cctype> // Required for the toupper() function
 #include "ScreenManager.h"
-#include "Song.h"
+#include "../Song.h"
 
 using namespace std;
 

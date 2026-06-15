@@ -1,6 +1,6 @@
 #ifndef STACK_H
 #define STACK_H
-#include "Song.h"
+#include "../Song.h"
 
 class Stack {
 private:
