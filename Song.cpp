@@ -14,5 +14,16 @@ std::ostream &operator<<(std::ostream &temp, const Song &tempSong) {
 }
 
 int key_to_index(const Song &song, int size) {
-	// not sure what we want to do for the hash function
+	int sum = 0;
+    std::string id = song.getID();
+    
+    for (size_t i = 0; i < id.length(); i++) {
+        int ascii_val = static_cast<int>(id[i]); // Get ASCII value
+        int squared_val = ascii_val * ascii_val; // Square it
+        int position = i + 1;                    // Get position (1-based index)
+        
+        sum += (squared_val * position);         // Add to total sum
+    }
+    
+    return sum % size; // Modulo hashSize
 }

@@ -77,8 +77,11 @@ bool loadFromFile(HashTable<Song>*& hash, BST &bst, std::string fileName) {
 		if (!(temp >> date_published)) date_published = 0;
 
 		Song inputSong(song_id, song_name, artist_name, length, date_published);
-		hash->insert(inputSong, key_to_index);
-		bst.insert(inputSong.getID(), /*needs pointer here*/);
+		// Get the pointer from the Hash Table and pass it to the BST!
+        Song* storedSongPtr = hash->insert(inputSong, key_to_index);
+        if (storedSongPtr != nullptr) {
+           bst.insert(inputSong.getID(), storedSongPtr);
+		}
 	}
 	ifs.close();
 	return true;

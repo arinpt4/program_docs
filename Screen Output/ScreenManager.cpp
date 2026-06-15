@@ -1,6 +1,7 @@
 /*
     ScreenManager.cpp
     Implementation of the Unit 4 Screen Output functions.
+    Name: Aarush Muralinathan
 */
 
 #include <iostream>
@@ -11,50 +12,51 @@
 
 using namespace std;
 
-// ==========================================
 // SEARCH MANAGER
-// ==========================================
-void searchManager(HashTable& table) {
+
+void searchManager(HashTable<Song>& table) {
     string searchKey;
     cout << "\nEnter the Song ID to search for: ";
     cin >> searchKey;
 
+    // The Hash Table search requires a Song object, so we make a dummy one with the ID
+    Song dummySong(searchKey, "", "", "", 0);
+    Song foundSong; 
+    
     // Call the Hash Table's search function
-    Song* foundSong = table.search(searchKey);
+    int collisions = table.search(dummySong, key_to_index, foundSong);
 
-    if (foundSong != nullptr) {
-        // Song found! Display its details
-        cout << "\nFound: " << foundSong->getSong_Name() << "; "
-             << foundSong->getArtist_Name() << "; "
-             << foundSong->getLength() << "; "
-             << foundSong->getDate_Published() << "\n";
+    if (collisions != -1) {
+        cout << "\nFound: " << foundSong.getSong_Name() << "; "
+             << foundSong.getArtist_Name() << "; "
+             << foundSong.getLength() << "; "
+             << foundSong.getDate_Published() << "\n";
+        cout << "(Collisions during search: " << collisions << ")\n";
     } else {
-        // Song not found
         cout << "\nSong ID not found.\n";
     }
 }
 
-// ==========================================
 // DISPLAY MANAGER
-// ==========================================
-void displaySortedData(BinarySearchTree& bst) {
+
+void displaySortedData(BST& bst) {
     cout << "\n--- All Songs Sorted by ID ---\n";
     // The BST's inOrder traversal prints the keys in alphabetical order
-    bst.inOrder(); 
+    bst.displaySorted(); 
     cout << "------------------------------\n";
 }
 
-void displayIndentedTree(BinarySearchTree& bst) {
+void displayIndentedTree(BST& bst) {
     cout << "\n--- Indented Binary Search Tree ---\n";
     // This is the hidden 'T' option
-    bst.printIndentedTree();
+    bst.displayTreeShape();
     cout << "-----------------------------------\n";
 }
 
-// ==========================================
+
 // UNDO DELETE MANAGER
-// ==========================================
-void undoDeleteManager(Stack& undoStack, HashTable& table, BinarySearchTree& bst) {
+
+void undoDeleteManager(Stack& undoStack, HashTable<Song>& table, BST& bst) {
     // Check if the stack is empty (happens if no deletes occurred OR if saved to file)
     if (undoStack.isEmpty()) {
         cout << "\nCannot undo! The undo stack is empty.\n";
@@ -66,19 +68,20 @@ void undoDeleteManager(Stack& undoStack, HashTable& table, BinarySearchTree& bst
     Song restoredSong = undoStack.pop();
 
     // Re-insert the full song object into the Hash Table
-    table.insert(restoredSong);
+    Song* restoredPtr = table.insert(restoredSong, key_to_index);
 
     // Re-insert just the string ID key into the Binary Search Tree
-    bst.insert(restoredSong.getID());
+    if (restoredPtr != nullptr) {
+        bst.insert(restoredSong.getID(), restoredPtr);
+    }
 
     cout << "\nSuccessfully restored the most recently deleted song: " 
          << restoredSong.getSong_Name() << "\n";
 }
 
-// ==========================================
 // MAIN MENU LOOP
-// ==========================================
-void runMenu(HashTable& table, BinarySearchTree& bst, Stack& undoStack) {
+
+void runMenu(HashTable<Song>& table, BST& bst, Stack& undoStack) {
     char choice;
     bool keepRunning = true;
 

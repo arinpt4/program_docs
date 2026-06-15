@@ -1,12 +1,26 @@
-//just a temp for fileIO functions
-#include "FileIO.h"
+#include <iostream>
+#include "FileIO/FileIO.h"
+#include "Screen Output/ScreenManager.h"
+#include "Screen Output/Stack.h"
 
 int main() {
-	HashTable<Song>* hash = nullptr;
-	BinarySearchTree<std::string> bst;
-	std::string inputFileName = "inputFile.txt";
-	readSongData(hash, bst, inputFileName);
+    HashTable<Song>* hash = nullptr;
+    BST bst;
+    Stack undoStack;
+    std::string inputFileName = "inputFile.txt";
+    
+    // 1. Load Data
+    std::cout << "Loading system data...\n";
+    readSongData(hash, bst, inputFileName);
 
-	delete hash;
-	return 0;
+    // 2. Launch the Menu Loop (from ScreenManager)
+    if (hash != nullptr) {
+        runMenu(*hash, bst, undoStack);
+    } else {
+        std::cout << "Failed to initialize the system. Exiting.\n";
+    }
+
+    // 3. Clean up
+    delete hash;
+    return 0;
 }

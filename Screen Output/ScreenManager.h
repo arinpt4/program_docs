@@ -1,6 +1,7 @@
 /*
     ScreenManager.h
     Unit 4: Screen Output - Handles user menus, searching, display, and undo operations.
+    Name: Aarush Muralinathan
 */
 
 #ifndef SCREEN_MANAGER_H
@@ -8,25 +9,27 @@
 
 #include "HashTable.h"
 #include "BST/BST.h"
-#include "Stack.h" // <-- what is Stack.h? It's not in any file 
+#include "Stack.h" 
+#include "Song.h"
 
-// ==========================================
+
 // Function Prototypes
-// ==========================================
+
 
 // Prompts user for a key and searches the Hash Table
-void searchManager(HashTable& table);
+void searchManager(HashTable<Song>& table);
 
 // Displays all songs sorted by ID using the BST
-void displaySortedData(BinarySearchTree& bst);
+void displaySortedData(BST& bst);
 
 // Displays the BST structure as an indented tree (Hidden Option)
-void displayIndentedTree(BinarySearchTree& bst);
+void displayIndentedTree(BST& bst);
 
 // Reverses the most recent delete operation
-void undoDeleteManager(Stack& undoStack, HashTable& table, BinarySearchTree& bst);
+void undoDeleteManager(Stack& undoStack, HashTable<Song>& table, BST& bst);
 
 // The main loop that runs the user interface
-void runMenu(HashTable& table, BinarySearchTree& bst, Stack& undoStack);
+void runMenu(HashTable<Song>& table, BST& bst, Stack& undoStack);
 
 #endif 
+ 

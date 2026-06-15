@@ -24,9 +24,9 @@ public:
         delete[] table;
     }
 
-    bool insert(const T& item, int (*hashFunction)(const T&, int)) {
+    T* insert(const T& item, int (*hashFunction)(const T&, int)) {
         if (count >= size) {
-            return false;
+            return nullptr; // Hash table is full
         }
 
         int index = hashFunction(item, size);
@@ -36,18 +36,18 @@ public:
             if (table[index].getOccupied() != 1) {
                 table[index].setItem(item);
                 count++;
-                return true;
+                return &table[index].getItemRef();
             }
 
             if (table[index].getItem() == item) {
-                return false;
+                return nullptr;
             }
 
             index = (index + 1) % size;
 
         } while (index != startIndex);
 
-        return false;
+        return nullptr;
     }
 
     int search(const T& item, int (*hashFunction)(const T&, int), T& foundItem) const {
