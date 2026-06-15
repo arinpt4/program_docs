@@ -9,7 +9,7 @@
 #include <cctype> // Required for the toupper() function
 #include "ScreenManager.h"
 #include "../Song.h"
-
+#include "../FileIO/FileIO.h"
 using namespace std;
 
 // SEARCH MANAGER
@@ -117,6 +117,7 @@ void runMenu(HashTable<Song>& table, BST& bst, Stack& undoStack) {
                 cout << "\nSaving data to file...\n";
                 // CRITICAL INSTRUCTION: Clean out the stack upon saving
                 undoStack.clear();
+                saveSongData(table);
                 cout << "Data saved successfully.\n";
                 cout << "*** The undo stack has been cleared. Undo is no longer possible. ***\n";
                 break;
