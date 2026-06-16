@@ -158,6 +158,7 @@ void runMenu(HashTable<Song>& table, BST& bst, Stack& undoStack) {
             }
             case 'Q':
                 keepRunning = false;
+                cout << "Quitting!\n";
                 break;
             default:
                 cout << "\nInvalid option. Please try again.\n";
