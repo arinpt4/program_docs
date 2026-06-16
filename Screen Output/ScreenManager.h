@@ -28,6 +28,9 @@ void displayIndentedTree(BST& bst);
 // Prompts user for a key and deletes it from the system
 void deleteManager(HashTable<Song>& table, BST& bst, Stack& undoStack);
 
+// Prints statistics for hash table
+void statsManager(HashTable<Song>& table); 
+
 // Reverses the most recent delete operation
 void undoDeleteManager(Stack& undoStack, HashTable<Song>& table, BST& bst);
 

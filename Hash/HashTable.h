@@ -13,21 +13,17 @@ HashNode<T>* table;
 int size;
 int count;
 
-```
 // Statistics
 int totalCollisions;
 int longestCollisionPath;
-```
 
 public:
 // Constructor
 HashTable(int s = 101) {
-size = s;
-count = 0;
-totalCollisions = 0;
-longestCollisionPath = 0;
-
-```
+    size = s;
+    count = 0;
+    totalCollisions = 0;
+    longestCollisionPath = 0;
     table = new HashNode<T>[size];
 }
 
@@ -243,7 +239,6 @@ void printHashTable() const {
         std::cout << "\n";
     }
 }
-```
 
 };
 

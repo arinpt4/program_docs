@@ -84,6 +84,11 @@ void deleteManager(HashTable<Song>& table, BST& bst, Stack& undoStack) {
     }
 }
 
+// STATISTICS MANAGER
+
+void statsManager(HashTable<Song>& table){
+    table.displayHashStats();
+}
 
 // UNDO DELETE MANAGER
 
@@ -121,6 +126,7 @@ void runMenu(HashTable<Song>& table, BST& bst, Stack& undoStack) {
         cout << "S - Search for a Song\n";
         cout << "P - Print data sorted by ID\n";
         cout << "D - Delete a Song\n";
+        cout << "H - Show Hash Statistics\n";
         cout << "U - Undo delete\n";
         cout << "F - Save to file\n";
         cout << "Q - Quit\n";
@@ -142,6 +148,9 @@ void runMenu(HashTable<Song>& table, BST& bst, Stack& undoStack) {
                 break;
             case 'D':
                 deleteManager(table, bst, undoStack);
+                break;
+            case 'H':
+                statsManager(table);
                 break;
             case 'U':
                 undoDeleteManager(undoStack, table, bst);
