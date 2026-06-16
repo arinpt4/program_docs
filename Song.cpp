@@ -1,4 +1,5 @@
 #include "Song.h"
+#include <cctype>
 
 Song::Song()
 	: _song_id(""), _song_name(""), _artist_name(""), _length(""), _date_published(0) {}
