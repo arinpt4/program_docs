@@ -13,6 +13,33 @@
 #include "../Hash/HashTable.h"
 using namespace std;
 
+// INSERT MANAGER
+void insertManager(HashTable<Song>& table, BST& bst){
+    string key; 
+    string sName; 
+    string aName; 
+    string length; 
+    int year; 
+    cout << "Enter key: ";
+    cin >> key; 
+    cout << "Enter song name: "; 
+    cin.ignore(); 
+    getline(cin, sName);
+    cout << "Enter artist name: ";
+    getline(cin, aName); 
+    cout << "Enter song length: ";
+    cin >> length; 
+    cout << "Enter year published: ";
+    cin >> year; 
+    Song tempSong(key,sName,aName,length,year);
+    Song* songPtr = table.insert(tempSong, key_to_index);
+    // Re-insert just the string ID key into the Binary Search Tree
+    if (songPtr != nullptr) {
+        bst.insert(tempSong.getID(), songPtr);
+    }
+    cout << "Song inserted successfully!\n"; 
+}
+
 // SEARCH MANAGER
 
 void searchManager(HashTable<Song>& table) {
@@ -123,6 +150,7 @@ void runMenu(HashTable<Song>& table, BST& bst, Stack& undoStack) {
 
     while (keepRunning) {
         cout << "\n=== Music Player Menu ===\n";
+        cout << "I - Insert a Song\n";
         cout << "S - Search for a Song\n";
         cout << "P - Print data sorted by ID\n";
         cout << "D - Delete a Song\n";
@@ -135,6 +163,9 @@ void runMenu(HashTable<Song>& table, BST& bst, Stack& undoStack) {
         choice = toupper(choice); // Convert input to uppercase to prevent errors
 
         switch (choice) {
+            case 'I':
+                insertManager(table, bst);
+                break; 
             case 'S':
                 searchManager(table);
                 break;

@@ -15,6 +15,8 @@
 
 // Function Prototypes
 
+// Asks user for songs details and inserts song into BST and Hash Table
+void insertManager(HashTable<Song>& table, BST& bst);
 
 // Prompts user for a key and searches the Hash Table
 void searchManager(HashTable<Song>& table);
