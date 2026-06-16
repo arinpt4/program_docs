@@ -20,8 +20,15 @@ void insertManager(HashTable<Song>& table, BST& bst){
     string aName; 
     string length; 
     int year; 
-    cout << "Enter key: ";
+    cout << "Enter key (must be 5 characters): ";
     cin >> key; 
+
+    // Error Handling for ID length
+    if (key.length() != 5) {
+        cout << "\nError: Invalid ID. The ID must be exactly 5 characters long.\n";
+        return; // Fall back to the menu
+    }
+
     cout << "Enter song name: "; 
     cin.ignore(); 
     getline(cin, sName);
@@ -31,13 +38,20 @@ void insertManager(HashTable<Song>& table, BST& bst){
     cin >> length; 
     cout << "Enter year published: ";
     cin >> year; 
+
     Song tempSong(key,sName,aName,length,year);
     Song* songPtr = table.insert(tempSong, key_to_index);
-    // Re-insert just the string ID key into the Binary Search Tree
-    if (songPtr != nullptr) {
-        bst.insert(tempSong.getID(), songPtr);
+
+    // Error Handling for duplicates or full table
+    if (songPtr == nullptr) {
+        cout << "\nError: Could not insert song. (It may already exist or the system is full).\n";
+        return;
     }
-    cout << "Song inserted successfully!\n"; 
+
+    // Insert into BST
+    bst.insert(tempSong.getID(), songPtr);
+    
+    cout << "\nSong inserted successfully!\n"; 
 }
 
 // SEARCH MANAGER
