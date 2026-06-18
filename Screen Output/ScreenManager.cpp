@@ -30,7 +30,7 @@ void insertManager(HashTable<Song>& table, BST& bst){
     }
 
     cout << "Enter song name: "; 
-    cin.ignore(); 
+    cin.ignore();
     getline(cin, sName);
     cout << "Enter artist name: ";
     getline(cin, aName); 
@@ -218,4 +218,12 @@ void runMenu(HashTable<Song>& table, BST& bst, Stack& undoStack) {
                 cout << "\nInvalid option. Please try again.\n";
         }
     }
+
+    cout << "\nSaving data to file...\n";
+    // Call the actual save function from FileIO
+    saveSongData(table);
+    // CRITICAL INSTRUCTION: Clean out the stack upon saving
+    undoStack.clear();
+    cout << "Data saved successfully.\n";
+    cout << "*** The undo stack has been cleared. Undo is no longer possible. ***\n";
 }
