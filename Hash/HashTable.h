@@ -1,3 +1,19 @@
+/*
+    HashTable.h
+
+    Unit 3: Hash Table Algorithms
+
+    Name: Sai Lin Aung
+
+    Description:
+    Implements the Hash Table used in the Song Player application.
+    The Hash Table stores song records using the song ID as the key
+    and provides efficient insertion, searching, deletion, and
+    collision handling through linear probing. The Hash Table works
+    alongside the Binary Search Tree to improve search performance
+    and provide hash table statistics.
+*/
+
 #ifndef HASHTABLE_H
 #define HASHTABLE_H
 
