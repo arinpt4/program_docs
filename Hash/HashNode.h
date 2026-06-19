@@ -1,3 +1,17 @@
+/*
+    HashNode.h
+
+    Unit 3: Hash Table Algorithms
+
+    Name: Sai Lin Aung
+
+    Description:
+    Defines the HashNode structure used by the Hash Table.
+    Each node stores a Song object and status information
+    required for insertion, searching, deletion, and
+    collision resolution.
+*/
+
 #ifndef HASHNODE_H
 #define HASHNODE_H
 
