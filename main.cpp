@@ -1,5 +1,6 @@
 /*
-Unit 1: Team Coordination - main(), integration, and testing
+Unit 1: Team Coordination - main(), integration, and testing. Main initializes BST, hash table and stack, and passes it to readSongData function. 
+If there is data in the file, i.e hash table pointer is not nullptr, run runMenu 
 Name: Arin Thakkar
 */
 
